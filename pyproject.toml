@@ -1,0 +1,37 @@
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "lgi"
+dist-name = "django-lgi"
+author = "Jarosław Wygoda"
+author-email = "jaroslaw@wygoda.me"
+home-page = "https://github.com/jwygoda/django-lgi"
+requires = ["django>=3"]
+requires-python=">=3.6"
+description-file = "README.md"
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Framework :: Django :: 3.0",
+    "Framework :: Django :: 3.1",
+]
+
+[tool.flit.metadata.requires-extra]
+dev = ["black", "isort", "pre-commit"]
+test = ["tox"]
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+line_length = 88
+known_third_party = ["django"]
+
+[flake8]
+max_line_length = 88
