@@ -1,9 +1,9 @@
 """
 Django Lambda Gateway Interface
 """
-__version__ = "0.1.1"
-
+__version__ = "0.1.2"
 import logging
+from base64 import b64decode
 from io import BytesIO, StringIO
 
 import django
@@ -47,7 +47,12 @@ class LGIRequest(HttpRequest):
             # Duplicate query strings are combined with commas
             self.META[corrected_name] = value
         self._set_content_type_params(self.META)
-        self._stream = BytesIO(self.event.get("body", "").encode())
+        body = self.event.get("body", "")
+        if event.get("isBase64Encoded", False):
+            body_bytes = b64decode(body)
+        else:
+            body_bytes = body.encode()
+        self._stream = BytesIO(body_bytes)
         self._read_started = False
         self.resolver_match = None
 

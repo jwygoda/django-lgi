@@ -55,6 +55,24 @@ class LGITestCase(SimpleTestCase):
         self.assertEqual(response["body"], "Hello Andrew!")
         self.assertEqual(response["statusCode"], 200)
 
+    def test_body_b64(self):
+        event = {
+            "version": "2.0",
+            "rawQueryString": "",
+            "headers": {
+                "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
+            },
+            "requestContext": {
+                "domainName": "id.execute-api.us-east-1.amazonaws.com",
+                "http": {"method": "POST", "path": "/", "sourceIp": "IP"},
+            },
+            "body": "bmFtZT1BbmRyZXc=",  # name=Andrew
+            "isBase64Encoded": True,
+        }
+        response = self.application(event, None)
+        self.assertEqual(response["body"], "Hello Andrew!")
+        self.assertEqual(response["statusCode"], 200)
+
     def test_get_query_string(self):
         event = {
             "version": "2.0",
