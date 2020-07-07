@@ -1,7 +1,7 @@
 """
 Django Lambda Gateway Interface
 """
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 import logging
 from io import BytesIO, StringIO
@@ -47,7 +47,7 @@ class LGIRequest(HttpRequest):
             # Duplicate query strings are combined with commas
             self.META[corrected_name] = value
         self._set_content_type_params(self.META)
-        self._stream = BytesIO(self.event["body"].encode())
+        self._stream = BytesIO(self.event.get("body", "").encode())
         self._read_started = False
         self.resolver_match = None
 

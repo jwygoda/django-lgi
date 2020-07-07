@@ -30,7 +30,6 @@ class LGITestCase(SimpleTestCase):
                 "domainName": "id.execute-api.us-east-1.amazonaws.com",
                 "http": {"method": "GET", "path": "/", "sourceIp": "IP"},
             },
-            "body": "Hello from Lambda",
         }
         response = self.application(event, None)
         self.assertEqual(response["body"], "Hello World!")
@@ -65,7 +64,6 @@ class LGITestCase(SimpleTestCase):
                 "domainName": "id.execute-api.us-east-1.amazonaws.com",
                 "http": {"method": "GET", "path": "/", "sourceIp": "IP"},
             },
-            "body": "Hello from Lambda",
         }
         response = self.application(event, None)
         self.assertEqual(response["body"], "Hello Andrew!")
@@ -82,7 +80,6 @@ class LGITestCase(SimpleTestCase):
                 "domainName": "id.execute-api.us-east-1.amazonaws.com",
                 "http": {"method": "GET", "path": "/meta/", "sourceIp": "IP"},
             },
-            "body": "Hello from Lambda",
         }
         response = self.application(event, None)
         self.assertEqual(response["body"], "From Wales")
